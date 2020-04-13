@@ -9,8 +9,6 @@ export default class ClockItem extends Component {
       minute: 0,
       second: 0,
     };
-    this.itemClock = props.clocksSetup;
-    this.itemClose = props.onClose;
     this.timeInterval = null;
     this.setClock = this.setClock.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -20,7 +18,7 @@ export default class ClockItem extends Component {
     return (
       <>
         <div className='item-clock'>
-          <p>{this.itemClock.name}</p>
+          <p>{this.props.clocksSetup.name}</p>
           <p className='timer'>
             {this.state.hour < 10 ? `0${this.state.hour}` : this.state.hour}:
             {this.state.minute < 10 ? `0${this.state.minute}` : this.state.minute}:
@@ -32,12 +30,12 @@ export default class ClockItem extends Component {
   }
 
   handleClose() {
-    this.itemClose(this.itemClock.id);
+    this.props.onClose(this.props.clocksSetup.id);
   }
 
   setClock() {
     const date = new Date();
-    const h = parseInt(date.getUTCHours(), 10) + parseInt(this.itemClock.timeZone, 10);
+    const h = parseInt(date.getUTCHours(), 10) + parseInt(this.props.clocksSetup.timeZone, 10);
     const m = parseInt(date.getUTCMinutes(), 10);
     const s = parseInt(date.getUTCSeconds(), 10);
 
